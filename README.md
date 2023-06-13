@@ -4,9 +4,13 @@ in this project we tried to solve two different problems:
 in some cases the satalite needs to know the orientention between itself and earth and he does it by detcting the horizon line and calculating the 
 angle of the line compared to the satalite.
 in the detect_horizon.py file we have function that get as an input image of earth(part of it) in space and as an output you get the images that describes the work flow to detect the horizon line and in addition return two points that creates the line of the horizon.
+
 the work flow of the algorithm to detect the horizon line:
+
 1.get the original image
+
 2.convert the original image to gray_scale
+
 3.blurr the image
 
 
