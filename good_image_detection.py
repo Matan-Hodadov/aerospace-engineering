@@ -23,10 +23,15 @@ images = os.listdir(current_directory)
 print("Window threshold:" + str(detection_variance_threshold),
       "Window size:" + str(window_len),
       "Variance threshold:" + str(detection_variance_threshold))
+plt.figure()
 for image_name in images:
     image = cv2.imread(dataset_name+'/'+image_name)
     laplacian_image = cv2.Laplacian(image, cv2.CV_64F)
     if var(image) < var(laplacian_image):
+        print("Image isn't good enough. Laplacian variance is bigger then normal variance")
+        plt.title("Image isn't good enough.")
+        plt.imshow(image)
+        plt.show()
         continue
     laplacian_var_sum = 0
     window_num = 0
@@ -38,12 +43,13 @@ for image_name in images:
             laplacian_window = laplacian_image[j:j+window_len, i:i+window_len, :]
 
             if var(laplacian_window) < window_variance_threshold:
+
                 continue
             laplacian_var_sum += var(laplacian_window)
             window_num += 1
 
     laplacian_var_sum = laplacian_var_sum//window_num
-    plt.figure()
+
     print("Image name:", image_name)
     if laplacian_var_sum < detection_variance_threshold:
         print("Image isn't good enough. Calculated variance is:", laplacian_var_sum)
