@@ -29,6 +29,8 @@ then we need to find the best intensity value threshold that seperate those two 
 
 8.return images of the horizon line and two points that creates the horizon line.
 
+the red line in the original images is the line we found with the RANSAC algorithm.
+
 
 ![image_detect_horizon_line](https://github.com/Matan-Hodadov/aerospace-engineering/assets/61780283/e37a26e1-ba74-49ec-9154-408b750def80)
 
