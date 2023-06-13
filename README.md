@@ -13,7 +13,23 @@ the work flow of the algorithm to detect the horizon line:
 
 3.blurr the image
 
+4.compute a histogram of intenseties of all the pixels in the blured image. because the image contains 2 main parts:the earth and space, then the histogram will contain two main gaussian distributions like this:
 
+
+
+![histogram](https://github.com/Matan-Hodadov/aerospace-engineering/assets/61780283/d0b4433e-d893-4cda-ac00-e6e08c1b44b3)
+
+then we need to find the best intensity value threshold that seperate those two distributions.
+
+5. we check every pixel in the image, if his intensity is greater then the threshold then we give it value 1, else 0.
+
+6. now we can preform canny edge detection and detect the pixels of the horizon line.
+
+7. we get all the coardinates of the pixels of the horizon line and train a RANSAC model to fit the best line to those points.
+
+8.return images of the horizon line and two points that creates the horizon line.
+
+the red line in the original images is the line we found with the RANSAC algorithm.
 
 
 ![image_detect_horizon_line](https://github.com/Matan-Hodadov/aerospace-engineering/assets/61780283/e37a26e1-ba74-49ec-9154-408b750def80)
