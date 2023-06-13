@@ -8,6 +8,10 @@ the work flow of the algorithm to detect the horizon line:
 1.get the original image
 2.convert the original image to gray_scale
 3.blurr the image
+
+
+
+
 ![image_detect_horizon_line](https://github.com/Matan-Hodadov/aerospace-engineering/assets/61780283/e37a26e1-ba74-49ec-9154-408b750def80)
 
 
