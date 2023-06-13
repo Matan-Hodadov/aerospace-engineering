@@ -12,19 +12,22 @@ def var(image):
 
 
 dataset_name = 'good_image_dataset'
-window_len = 20
-variance_threshold = 300
+window_len = 35
+window_variance_threshold = 125
+detection_variance_threshold = 800
 
 # path
 current_directory = os.getcwd()
 current_directory += '\\' + dataset_name
 images = os.listdir(current_directory)
+print("Window threshold:" + str(detection_variance_threshold),
+      "Window size:" + str(window_len),
+      "Variance threshold:" + str(detection_variance_threshold))
 for image_name in images:
     image = cv2.imread(dataset_name+'/'+image_name)
     laplacian_image = cv2.Laplacian(image, cv2.CV_64F)
     if var(image) < var(laplacian_image):
         continue
-    var_sum = 0
     laplacian_var_sum = 0
     window_num = 0
     width = image.shape[0]
@@ -34,16 +37,16 @@ for image_name in images:
             window = image[j:j+window_len, i:i+window_len, :]
             laplacian_window = laplacian_image[j:j+window_len, i:i+window_len, :]
 
-            if var(laplacian_window) < variance_threshold:
+            if var(laplacian_window) < window_variance_threshold:
                 continue
-            var_sum += var(window)
             laplacian_var_sum += var(laplacian_window)
             window_num += 1
 
-    print("--------------------------------------------------------------------------")
-    print(image_name)
-    print("image var:", var(image))
-    print("laplacian image var:", var(laplacian_image))
-    print("image window var:", var_sum//window_num)
-    print("laplacian image window var:", laplacian_var_sum//window_num)
+    laplacian_var_sum = laplacian_var_sum//window_num
+    print("Image name:", image_name)
+    if laplacian_var_sum < detection_variance_threshold:
+        print("Image isn't good enough. Calculated variance is:", laplacian_var_sum)
+    else:
+        print("Image is good!. Calculated variance is:", laplacian_var_sum)
+
 
