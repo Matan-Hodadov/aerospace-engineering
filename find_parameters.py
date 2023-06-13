@@ -11,7 +11,6 @@ def var(image):
     return int(ndimage.variance(image))
 
 
-
 current_directory = os.getcwd()
 dataset_name = 'good_image_dataset'
 current_directory += '\\' + dataset_name
@@ -46,6 +45,18 @@ for window_len in range(5, 41, 5):
                 vals.append(laplacian_var_sum//window_num)
         if len(vals) != images_num:
             continue
+
+        # IMPORTANT!
+        # It is important to know the type of pictures you have before you start using the vals
+        # in order to find the best parameters
+        # in our data we have 4 pictures (very bad one, kind of bad, better pic but still not good,
+        # and a very good image)
+
+        # You can put only good images to see the results of good images. The same goes for bad images
+        # You can also put a pair of very good and very bad images and check their differences
+
+        # In our data we want as much spread as possible and that the last val will be the smallest as can be
+        # This is why we calculated the differences and then multiply the last one by 1 and then sum
         for inx in range(images_num-1):
             vals[inx] = vals[inx]-vals[inx+1]
         vals[-1] = -1 * vals[-1]
