@@ -43,10 +43,13 @@ for image_name in images:
             window_num += 1
 
     laplacian_var_sum = laplacian_var_sum//window_num
+    plt.figure()
     print("Image name:", image_name)
     if laplacian_var_sum < detection_variance_threshold:
         print("Image isn't good enough. Calculated variance is:", laplacian_var_sum)
+        plt.title("Image isn't good enough. Calculated variance is: " + str(laplacian_var_sum))
     else:
         print("Image is good!. Calculated variance is:", laplacian_var_sum)
-
-
+        plt.title("Image is good!. Calculated variance is: " + str(laplacian_var_sum))
+    plt.imshow(image)
+    plt.show()
